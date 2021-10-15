@@ -37,8 +37,8 @@ pipeline {
             steps {
                 echo 'Deploying.....'
                 script {
-                    sh ' ./DeployScripts/Deploy.sh '
-
+                    sh ''' chmod +x ./DeployScripts/Deploy.sh
+                    ./DeployScripts/Deploy.sh '''
                 }
             }
         }
