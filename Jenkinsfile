@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Scanning the Image'
                 script {
-                    docker.logs("minecraft:${env.BUILD_NUMBER}")
+                    sh ' docker run -it --rm --name Testing minecraft:${env.BUILD_NUMBER} curl localhost:25565 '
                 }
             }
         }
