@@ -26,8 +26,9 @@ pipeline {
                 script {
                     sh ' echo "Docker Login" '
                     sh ' docker login -u edgarestebanramirez -p $PASS'
-                    sh ' echo "Docker Push" '
+                    sh ' echo "Docker Tag" '
                     sh ' docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting'
+                    sh ' echo "Docker Push" '
                     sh ' docker push edgarestebanramirez/jenkinstesting'
                 }
             }
@@ -35,6 +36,10 @@ pipeline {
         stage('Push-Deploy') {
             steps {
                 echo 'Deploying....'
+                script {
+                    sh ' ./Deploy.sh '
+
+                }
             }
         }
     }
