@@ -24,12 +24,12 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh ' echo "Docker Login" '
-                    sh ' docker login -u edgarestebanramirez -p $PASS'
-                    sh ' echo "Docker Tag" '
-                    sh ' docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting'
-                    sh ' echo "Docker Push" '
-                    sh ' docker push edgarestebanramirez/jenkinstesting'
+                    sh ''' echo "Docker Login"
+                    docker login -u edgarestebanramirez -p $PASS
+                    echo "Docker Tag"
+                    docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting
+                    echo "Docker Push"
+                    docker push edgarestebanramirez/jenkinstesting'''
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    sh ' .DeployScripts/Deploy.sh '
+                    sh ' ./DeployScripts/Deploy.sh '
 
                 }
             }
