@@ -21,6 +21,7 @@ pipeline {
                 echo 'Scanning the Image'
                 script {
                     docker.logs("minecraft:${env.BUILD_NUMBER}")
+                }
             }
         }
         stage('Push-Deploy') {
