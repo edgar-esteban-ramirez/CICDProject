@@ -28,6 +28,7 @@ pipeline {
                     sh ' docker login -u edgarestebanramirez -p $PASS'
                     sh ' echo "Docker Push" '
                     sh ' docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting'
+                    sh ' docker push edgarestebanramirez/jenkinstesting'
                 }
             }
         }
