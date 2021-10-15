@@ -11,7 +11,7 @@ pipeline {
             steps{
                 echo  "Building Image"
                 script{
-                    docker.build("edgar-esteban-ramirez/CICDProject:${env.BUILD_NUMBER}")
+                    docker.build("minecraft:${env.BUILD_NUMBER}")
                 }
                 
             }         
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Scanning the Image'
                 script {
-                docker.scan("edgar-esteban-ramirez/CICDProject:${env.BUILD_NUMBER}")    
+                docker.scan("minecraft:${env.BUILD_NUMBER}")    
                 }
             }
         }
