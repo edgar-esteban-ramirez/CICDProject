@@ -35,7 +35,7 @@ pipeline {
         }
         stage('Push-Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying.....'
                 script {
                     sh ' ./DeployScripts/Deploy.sh '
 
