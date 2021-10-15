@@ -37,7 +37,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    sh ' ./Deploy.sh '
+                    sh ' .DeployScripts/Deploy.sh '
 
                 }
             }
