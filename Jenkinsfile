@@ -3,7 +3,7 @@ pipeline {
 
     environment {
     
-        PASS = credentials('835dbe41-f110-445a-94f8-224b3fd61b12') 
+        PASS = credentials('DockerHub') 
     }
 
     stages {
