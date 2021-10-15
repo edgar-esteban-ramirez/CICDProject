@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+    
+        PASS = credentials('835dbe41-f110-445a-94f8-224b3fd61b12') 
+    }
+
     stages {
         stage('Pre-Build') {
             steps {
@@ -18,9 +23,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Scanning the Image'
                 script {
-                    sh ' docker run --rm --name Testing minecraft:${BUILD_NUMBER} "curl localhost:25565" '
+                    sh ' echo "Docker Login" '
+                    sh ' docker login -u edgarestebanramirez -p $PASS'
+                    sh ' echo "Docker Push" '
+                    sh ' docker tag minecraft:$BUILD_TAG edgarestebanramirez/jenkinstesting'
                 }
             }
         }
