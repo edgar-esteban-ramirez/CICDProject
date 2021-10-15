@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Scanning the Image'
                 script {
-                docker.scan("minecraft:${env.BUILD_NUMBER}")    
+                docker logs -f minecraft:${env.BUILD_NUMBER}   
                 }
             }
         }
