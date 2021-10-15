@@ -24,7 +24,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh ''' echo "Docker Login"
+                    sh ''' 
+                    echo "Docker Login"
                     docker login -u edgarestebanramirez -p $PASS
                     echo "Docker Tag"
                     docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting
@@ -37,7 +38,9 @@ pipeline {
             steps {
                 echo 'Deploying.....'
                 script {
-                    sh ''' chmod +x ./DeployScripts/Deploy.sh
+                    sh ''' 
+                    ssh root@DeployServer ' docker pull edgarestebanramirez/jenkinstesting:latest '
+                    ssh root@DeployServer ' docker run -p 25565:25565 --name minecraftjenkins edgarestebanramirez/jenkinstesting:latest '
                     ./DeployScripts/Deploy.sh '''
                 }
             }
