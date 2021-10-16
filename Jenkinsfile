@@ -9,7 +9,11 @@ pipeline {
     stages {
         stage('Pre-Build') {
             steps {
-                echo 'Pre-Build Stage'
+                script{
+                    sh '''
+                    echo "Docker Login"
+                    docker login -u edgarestebanramirez -p $PASS '''
+                }
             }
         }
         stage('Build') {
@@ -25,8 +29,6 @@ pipeline {
             steps {
                 script {
                     sh ''' 
-                    echo "Docker Login"
-                    docker login -u edgarestebanramirez -p $PASS
                     echo "Docker Tag"
                     docker tag minecraft:$BUILD_NUMBER edgarestebanramirez/jenkinstesting
                     echo "Docker Push"
@@ -39,9 +41,10 @@ pipeline {
                 echo 'Deploying.....'
                 script {
                     sh ''' 
+                    echo "Docker Pull"
                     ssh root@DeployServer ' docker pull edgarestebanramirez/jenkinstesting:latest '
-                    ssh root@DeployServer ' docker run -p 25565:25565 --name minecraftjenkins edgarestebanramirez/jenkinstesting:latest '
-                    ./DeployScripts/Deploy.sh '''
+                    echo "Docker run"
+                    ssh root@DeployServer ' docker run -d -p 25565:25565 --name minecraftjenkins edgarestebanramirez/jenkinstesting:latest '''
                 }
             }
         }
