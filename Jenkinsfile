@@ -44,7 +44,7 @@ pipeline {
                     echo "Docker Pull"
                     ssh root@DeployServer ' docker pull edgarestebanramirez/jenkinstesting:latest '
                     echo "Docker run"
-                    ssh root@DeployServer ' docker run -d -p 25565:25565 --name minecraftjenkins edgarestebanramirez/jenkinstesting:latest '''
+                    ssh root@DeployServer ' docker run -d -p 25565:25565 --name minecraftjenkins edgarestebanramirez/jenkinstesting:latest ' '''
                 }
             }
         }
